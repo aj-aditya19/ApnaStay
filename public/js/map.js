@@ -1,5 +1,12 @@
 // const { coordinates } = require("@maptiler/client");
-const maptilerToken = "<%= process.env.MAP_TOKEN %>";
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    if(!mapToken){
+        console.error("Map token missing!");
+    }
+})
+
+// const maptilerToken = "<%= process.env.MAP_TOKEN %>";
 
 maptilersdk.config.apiKey = maptilerToken;
 const map = new maptilersdk.Map({
