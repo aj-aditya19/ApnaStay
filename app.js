@@ -10,8 +10,11 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+<<<<<<< HEAD
 const { default: MongoStore } = require("connect-mongo");
 
+=======
+>>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -29,14 +32,18 @@ app.use(methodOverride("_method"));
 
 app.use(express.static(path.join(__dirname, "public")));
 
+<<<<<<< HEAD
 const dbUrl = process.env.ATLASDB_URL;
 
+=======
+>>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
 main()
   .then((res) => {
     console.log("Database Connection Successful");
   })
   .catch((err) => {
     console.log("Some error occured in the database");
+<<<<<<< HEAD
     console.log(err);
   });
   
@@ -61,6 +68,16 @@ store.on("error", ()=>{
 const sessionOptions = {
   store,
   secret: process.env.SECRET,
+=======
+  });
+async function main() {
+  await mongoose.connect("mongodb://127.0.0.1:27017/ApnaStay");
+}
+
+//Session Configuration
+const sessionOptions = {
+  secret: "mysupersecretcode",
+>>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -88,6 +105,14 @@ app.use((req, res, next) => {
   next();
 });
 
+<<<<<<< HEAD
+=======
+//Root Path
+app.get("/", (req, res) => {
+  res.send("Hi, Im root");
+});
+
+>>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
 
 
 //Listings Router

@@ -106,7 +106,11 @@ body {
 
 /* Show Page */
 .show-img {
+<<<<<<< HEAD
   height: 40vh;
+=======
+  height: 30vh;
+>>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
 }
 
 .btns {

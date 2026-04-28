@@ -30,12 +30,21 @@ const listingSchema = new Schema({
   geometry: {
     type: {
       type: String,
+<<<<<<< HEAD
       enum: ["Point"],
       default: "Point",
     },
     coordinates: {
       type: [Number],
       default: [0,0],
+=======
+      enum: ['Point'],
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+>>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
     }
   },
 });

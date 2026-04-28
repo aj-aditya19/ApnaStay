@@ -1,4 +1,5 @@
 <% layout("/layouts/boilerplate") %>
+<<<<<<< HEAD
     <!-- <form action="/listings/new" method="GET">
       <button>Create new Listing</button>
     </form> -->
@@ -111,6 +112,18 @@
     <% for(let listing of allListings){ %>
       <a href="/listings/<%= listing._id %>" class="listing-link">
         <div class="card col listing-card" style="width: 21rem;">
+=======
+  <body>
+    <h3>All Listings</h3>
+    <!-- <form action="/listings/new" method="GET">
+      <button>Create new Listing</button>
+    </form> -->
+
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <% for(let listing of allListings){ %>
+      <a href="/listings/<%= listing._id %>" class="listing-link">
+        <div class="card col listing-card" style="width: 18rem;">
+>>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
           <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem">
           
           <div class="card-img-overlay"></div>
@@ -118,13 +131,17 @@
             <p class="card-text">
               <b><%= listing.title %></b> <br>
                 &#8377;<%= listing.price.toLocaleString("en-IN") %>/night
+<<<<<<< HEAD
                 <i class="tax-info"> &nbsp; +18% GST</i>
+=======
+>>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
             </p>
           </div>
         </div>
       </a>
     <% } %>
   </div>
+<<<<<<< HEAD
 
 
   <script>
@@ -142,3 +159,6 @@
     });
 
   </script>
+=======
+  </body>
+>>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
