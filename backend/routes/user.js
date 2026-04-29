@@ -1,18 +1,21 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const passport = require("passport");
-const { saveRedirectUrl } = require("../middleware.js");
-const userController = require("../controllers/users.js");
-const wrapAsync = require("../utils/wrapAsync.js");
+import passport from "passport";
+import { saveRedirectUrl } from "../middleware.js";
+import {
+  renderSignupForm,
+  signup,
+  renderLoginForm,
+  login,
+  logout,
+} from "../controllers/users.js";
+import wrapAsync from "../utils/wrapAsync.js";
 
-router
-  .route("/signup")
-  .get(userController.renderSignupForm)
-  .post(wrapAsync(userController.signup));
+router.route("/signup").get(renderSignupForm).post(wrapAsync(signup));
 
 router
   .route("/login")
-  .get(userController.renderLoginForm)
+  .get(renderLoginForm)
   .post(saveRedirectUrl, (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
       if (err) {
@@ -30,11 +33,11 @@ router
           return next(loginErr);
         }
 
-        return userController.login(req, res, next);
+        return login(req, res, next);
       });
     })(req, res, next);
   });
 
-router.get("/logout", userController.logout);
+router.get("/logout", logout);
 
-module.exports = router;
+export default router;

@@ -1,10 +1,9 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
-const axios = require("axios");
-const { cloudinary } = require("../cloudConfig.js");
-const Listing = require("../models/listing");
-const User = require("../models/user");
-const sample = require("../init/data.js");
+import "dotenv/config";
+import mongoose from "mongoose";
+import { cloudinary } from "../cloudConfig.js";
+import Listing from "../models/listing.js";
+import User from "../models/user.js";
+import sampleListings from "../init/data.js";
 
 const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/ApnaStay";
 
@@ -42,8 +41,8 @@ async function main() {
   }
 
   // Seed listings and upload images to Cloudinary (by URL)
-  for (let i = 0; i < sample.data.length; i++) {
-    const item = sample.data[i];
+  for (let i = 0; i < sampleListings.length; i++) {
+    const item = sampleListings[i];
     try {
       // Upload image from remote URL to Cloudinary
       const uploadRes = await cloudinary.uploader.upload(item.image.url, {

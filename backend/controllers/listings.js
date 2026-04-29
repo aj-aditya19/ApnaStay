@@ -1,16 +1,16 @@
-const Listing = require("../models/listing");
-const axios = require("axios");
+import Listing from "../models/listing.js";
+import axios from "axios";
 
-module.exports.index = async (req, res) => {
+export const index = async (req, res) => {
   const allListings = await Listing.find({});
   res.render("listings/index.ejs", { allListings });
 };
 
-module.exports.renderNewForm = (req, res) => {
+export const renderNewForm = (req, res) => {
   res.render("listings/new.ejs");
 };
 
-module.exports.showListing = async (req, res) => {
+export const showListing = async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id)
     .populate({
@@ -23,25 +23,28 @@ module.exports.showListing = async (req, res) => {
     res.redirect("/listings");
   } else {
     console.log(listing);
-    res.render("listings/show.ejs", { 
-      listing, 
-      mapToken: process.env.MAP_TOKEN 
+    res.render("listings/show.ejs", {
+      listing,
+      mapToken: process.env.MAP_TOKEN,
     });
   }
 };
 
-module.exports.createListing = async (req, res) => {
+export const createListing = async (req, res) => {
   try {
     const { location, country } = req.body.listing;
 
     // Geocode the location using MapTiler API
     const geoRes = await axios.get(
-      `https://api.maptiler.com/geocoding/${encodeURIComponent(location + ", " + country)}.json?key=${process.env.MAP_TOKEN}`
+      `https://api.maptiler.com/geocoding/${encodeURIComponent(location + ", " + country)}.json?key=${process.env.MAP_TOKEN}`,
     );
 
     // Safety Check - make sure we got results
     if (!geoRes.data.features || geoRes.data.features.length === 0) {
-      req.flash("error", "Invalid Location! Please check the location and country.");
+      req.flash(
+        "error",
+        "Invalid Location! Please check the location and country.",
+      );
       return res.redirect("/listings/new");
     }
 
@@ -72,7 +75,7 @@ module.exports.createListing = async (req, res) => {
   }
 };
 
-module.exports.renderEditForm = async (req, res) => {
+export const renderEditForm = async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id);
   if (!listing) {
@@ -86,7 +89,7 @@ module.exports.renderEditForm = async (req, res) => {
   res.render("listings/edit.ejs", { listing, originalImageUrl });
 };
 
-module.exports.updateListing = async (req, res) => {
+export const updateListing = async (req, res) => {
   try {
     let { id } = req.params;
     let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
@@ -108,7 +111,7 @@ module.exports.updateListing = async (req, res) => {
   }
 };
 
-module.exports.deleteListing = async (req, res) => {
+export const deleteListing = async (req, res) => {
   try {
     let { id } = req.params;
     const listing = await Listing.findByIdAndDelete(id);

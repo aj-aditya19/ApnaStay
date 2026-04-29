@@ -1,9 +1,9 @@
-const Listing = require("./models/listing.js");
-const Review = require("./models/review.js");
-const ExpressError = require("./utils/ExpressError.js");
-const { listingSchema, reviewSchema } = require("./schema.js");
+import Listing from "./models/listing.js";
+import Review from "./models/review.js";
+import ExpressError from "./utils/ExpressError.js";
+import { listingSchema, reviewSchema } from "./schema.js";
 
-module.exports.isLoggedIn = (req, res, next) => {
+export const isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
     req.session.redirectUrl = req.originalUrl;
     req.flash("error", "You're not logged in. Please Login!");
@@ -12,14 +12,14 @@ module.exports.isLoggedIn = (req, res, next) => {
   next();
 };
 
-module.exports.saveRedirectUrl = (req, res, next) => {
+export const saveRedirectUrl = (req, res, next) => {
   if (req.session.redirectUrl) {
     res.locals.redirectUrl = req.session.redirectUrl;
   }
   next();
 };
 
-module.exports.isOwner = async (req, res, next) => {
+export const isOwner = async (req, res, next) => {
   let { id } = req.params;
   let listing = await Listing.findById(id);
 
@@ -33,7 +33,7 @@ module.exports.isOwner = async (req, res, next) => {
   next();
 };
 
-module.exports.validateListing = (req, res, next) => {
+export const validateListing = (req, res, next) => {
   let { error } = listingSchema.validate(req.body);
   if (error) {
     let errMsg = error.details.map((el) => el.message).join(",");
@@ -43,7 +43,7 @@ module.exports.validateListing = (req, res, next) => {
   }
 };
 
-module.exports.validateReview = (req, res, next) => {
+export const validateReview = (req, res, next) => {
   let { error } = reviewSchema.validate(req.body);
   if (error) {
     let errMsg = error.details.map((el) => el.message).join(",");
@@ -53,7 +53,7 @@ module.exports.validateReview = (req, res, next) => {
   }
 };
 
-module.exports.isReviewAuthor = async (req, res, next) => {
+export const isReviewAuthor = async (req, res, next) => {
   let { id, reviewId } = req.params;
   let review = await Review.findById(reviewId);
   if (!review.author._id.equals(res.locals.currentUser._id)) {

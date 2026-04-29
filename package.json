@@ -7,7 +7,7 @@
   "description": "",
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
+  "type": "module",
   "main": "backend/app.js",
   "scripts": {
     "start": "node backend/app.js",

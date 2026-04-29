@@ -1,25 +1,24 @@
-if (process.env.NODE_ENV != "production") {
-  require("dotenv").config();
-}
+import "dotenv/config";
+import express from "express";
+import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from "url";
+import methodOverride from "method-override";
+import ejsMate from "ejs-mate";
+import ExpressError from "./utils/ExpressError.js";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import flash from "connect-flash";
+import passport from "passport";
+import LocalStrategy from "passport-local";
+import User from "./models/user.js";
+import listingsRouter from "./routes/listings.js";
+import reviewsRouter from "./routes/review.js";
+import userRouter from "./routes/user.js";
 
-const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
-const path = require("path");
-const methodOverride = require("method-override");
-const ejsMate = require("ejs-mate");
-const ExpressError = require("./utils/ExpressError.js");
-const session = require("express-session");
-const { default: MongoStore } = require("connect-mongo");
-
-const flash = require("connect-flash");
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
-const User = require("./models/user.js");
-
-const listingsRouter = require("./routes/listings.js");
-const reviewsRouter = require("./routes/review.js");
-const userRouter = require("./routes/user.js");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");

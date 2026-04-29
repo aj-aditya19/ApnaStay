@@ -89,6 +89,16 @@ body {
 
 .navbar-brand{ display:flex; align-items:center; gap:0.5rem; font-weight:700; color:var(--text);}
 
+.site-logo {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.1rem;
+  border-radius: 50%;
+  object-fit: contain;
+  display: block;
+  background: #fff;
+}
+
 .search-btn{ background:var(--primary); color:#fff; border-radius:999px; padding:0.45rem 0.9rem; border:0; }
 .search-btn:hover{ background: color-mix(in srgb, var(--primary) 85%, black 15%); }
 .search-inp{ border-radius:999px; padding:0.5rem 1rem; font-size:1rem; border:1px solid rgba(0,0,0,0.08); }

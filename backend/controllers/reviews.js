@@ -1,8 +1,8 @@
-const Listing = require("../models/listing.js");
-const Review = require("../models/review.js");
+import Listing from "../models/listing.js";
+import Review from "../models/review.js";
 
 // Create a new review for a listing
-module.exports.createReview = async (req, res) => {
+export const createReview = async (req, res) => {
   let listing = await Listing.findById(req.params.id);
   let newReview = new Review(req.body.review);
   newReview.author = req.user._id;
@@ -17,7 +17,7 @@ module.exports.createReview = async (req, res) => {
 };
 
 // Delete an existing review
-module.exports.deleteReview = async (req, res) => {
+export const deleteReview = async (req, res) => {
   let { id, reviewId } = req.params;
   await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
   await Review.findByIdAndDelete(reviewId);

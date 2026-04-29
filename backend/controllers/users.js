@@ -1,10 +1,10 @@
-const User = require("../models/user.js");
+import User from "../models/user.js";
 
-module.exports.renderSignupForm = (req, res) => {
+export const renderSignupForm = (req, res) => {
   res.render("users/signup.ejs");
 };
 
-module.exports.signup = async (req, res, next) => {
+export const signup = async (req, res, next) => {
   try {
     let { username, email, password } = req.body;
     const newUser = new User({ username, email });
@@ -27,17 +27,17 @@ module.exports.signup = async (req, res, next) => {
   }
 };
 
-module.exports.renderLoginForm = (req, res) => {
+export const renderLoginForm = (req, res) => {
   res.render("users/login.ejs");
 };
 
-module.exports.login = async (req, res) => {
+export const login = async (req, res) => {
   req.flash("success", "Welcome back to ApnaStay!");
   let redirectUrl = res.locals.redirectUrl || "/listings";
   res.redirect(redirectUrl);
 };
 
-module.exports.logout = (req, res, next) => {
+export const logout = (req, res, next) => {
   req.logout((err) => {
     if (err) {
       return next(err);

@@ -1,7 +1,5 @@
-const mongoose = require("mongoose");
-const Review = require("./review");
-// const { coordinates } = require("@maptiler/sdk");
-const { required } = require("joi");
+import mongoose from "mongoose";
+import Review from "./review.js";
 const Schema = mongoose.Schema;
 
 const listingSchema = new Schema({
@@ -20,7 +18,7 @@ const listingSchema = new Schema({
   reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref: Review,
+      ref: "Review",
     },
   ],
   owner: {
@@ -35,8 +33,8 @@ const listingSchema = new Schema({
     },
     coordinates: {
       type: [Number],
-      default: [0,0],
-    }
+      default: [0, 0],
+    },
   },
 });
 
@@ -47,4 +45,4 @@ listingSchema.post("findOneAndDelete", async (listing) => {
 });
 
 const Listing = mongoose.model("Listing", listingSchema);
-module.exports = Listing;
+export default Listing;
