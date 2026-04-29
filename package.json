@@ -1,32 +1,27 @@
 {
-<<<<<<< HEAD
   "engines": {
     "node": "24.13.0"
   },
-=======
->>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
   "name": "airbnb",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "backend/app.js",
   "scripts": {
+    "start": "node backend/app.js",
+    "dev": "nodemon backend/app.js",
+    "seed": "node backend/seed/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@maptiler/client": "^1.8.1",
     "@maptiler/sdk": "^4.0.1",
-<<<<<<< HEAD
     "axios": "^1.15.2",
     "cloudinary": "^1.41.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^6.0.0",
-=======
-    "cloudinary": "^1.41.3",
-    "connect-flash": "^0.1.1",
->>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
     "ejs": "^4.0.1",
@@ -35,12 +30,8 @@
     "express-session": "^1.19.0",
     "joi": "^18.0.2",
     "method-override": "^3.0.0",
-<<<<<<< HEAD
     "mongodb": "^7.2.0",
     "mongoose": "^9.5.0",
-=======
-    "mongoose": "^8.21.1",
->>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e
     "multer": "^2.1.1",
     "multer-storage-cloudinary": "^4.0.0",
     "node-fetch": "^3.3.2",

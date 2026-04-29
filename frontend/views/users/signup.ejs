@@ -1,0 +1,38 @@
+<% layout("/layouts/boilerplate") %> 
+
+<section class="auth-shell auth-shell--signup">
+    <div class="auth-copy">
+        <p class="home-kicker">Join ApnaStay</p>
+        <h1>Create your account and start hosting or booking.</h1>
+        <p>
+            One account gives you access to listings, reviews, and a faster path to the places you want.
+        </p>
+    </div>
+
+    <div class="auth-card">
+        <h2>Sign up</h2>
+        <form action="/signup" method="POST" class="needs-validation auth-form" novalidate>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" id="username" class="form-control" required>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <div class="auth-password-wrap">
+                    <input type="password" name="password" id="password" class="form-control auth-password-input" required autocomplete="new-password">
+                    <button type="button" class="auth-password-toggle" data-password-target="password" aria-label="Show password">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <button class="btn btn-dark auth-btn auth-btn--signup">Create account</button>
+        </form>
+        <p class="auth-footnote">Already have an account? <a href="/login">Login</a></p>
+    </div>
+</section>

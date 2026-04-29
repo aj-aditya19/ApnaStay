@@ -1,0 +1,36 @@
+<div class="flash-stack position-fixed top-0 end-0 p-3">
+    <% if(success && success.length){ %>
+        <div class="toast align-items-center text-bg-success border-0 flash-toast show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <%= success %>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    <% } %>
+
+    <% if(error && error.length){ %>
+        <div class="toast align-items-center text-bg-danger border-0 flash-toast show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <%= error %>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<script>
+    window.addEventListener("load", () => {
+    const toasts = document.querySelectorAll(".flash-toast");
+    toasts.forEach((toastElement) => {
+      const toast = bootstrap.Toast.getOrCreateInstance(toastElement, {
+        delay: 3000,
+        autohide: true,
+      });
+      toast.show();
+    });
+    });
+</script>

@@ -1,7 +1,28 @@
-<<<<<<< HEAD
+node_modules/
+/.env
+.env.local
+.env.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log*
+logs/
+*.log
+/.vscode/
+.DS_Store
+Thumbs.db
+dist/
+build/
+coverage/
+/.parcel-cache/
+/.cache/
+public/uploads/
+backend/uploads/
+tmp/
+*.tgz
+/.idea/
+*.sln
+.classpath
+/.history/
 .env
 node_modules/
-=======
-/.env
-/node_modules
->>>>>>> 4bc6556bda247dfbd060e622f5e78fccb93b502e

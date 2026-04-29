@@ -1,11 +1,5 @@
 const Listing = require("../models/listing");
-
-const fetch = require("node-fetch").default;
-const { config } = require('@maptiler/client');
-const maptilerClient = require("@maptiler/client");
-config.fetch = globalThis.fetch;
-const mapToken = process.env.MAP_TOKEN;
-maptilerClient.config.apiKey = mapToken;
+const axios = require("axios");
 
 module.exports.index = async (req, res) => {
   const allListings = await Listing.find({});
@@ -29,42 +23,53 @@ module.exports.showListing = async (req, res) => {
     res.redirect("/listings");
   } else {
     console.log(listing);
-    res.render("listings/show.ejs", { listing });
+    res.render("listings/show.ejs", { 
+      listing, 
+      mapToken: process.env.MAP_TOKEN 
+    });
   }
 };
 
 module.exports.createListing = async (req, res) => {
-  // const response = await maptilerClient.geocoding.forward(req.body.listing.location);
-  // console.log(response.features[0].geometry.coordinates);
+  try {
+    const { location, country } = req.body.listing;
 
-  const location = req.body.listing.location;
-  const resGeo = await fetch(`https://api.maptiler.com/geocoding/${location}.json?key=${process.env.MAP_TOKEN}`);
+    // Geocode the location using MapTiler API
+    const geoRes = await axios.get(
+      `https://api.maptiler.com/geocoding/${encodeURIComponent(location + ", " + country)}.json?key=${process.env.MAP_TOKEN}`
+    );
 
-  const data = await resGeo.json();
+    // Safety Check - make sure we got results
+    if (!geoRes.data.features || geoRes.data.features.length === 0) {
+      req.flash("error", "Invalid Location! Please check the location and country.");
+      return res.redirect("/listings/new");
+    }
 
-  //Safety Check for resGeo
-  if(!data.features.length){
-    throw new Error("Invalid Location");
+    const coords = geoRes.data.features[0].geometry.coordinates; // [lng, lat]
+
+    let url = req.file.path;
+    let filename = req.file.filename;
+    console.log(url, "..", filename);
+
+    const newListing = new Listing({
+      ...req.body.listing,
+      owner: req.user._id,
+      image: { url, filename },
+      geometry: {
+        type: "Point",
+        coordinates: coords, // [lng, lat] from MapTiler
+      },
+    });
+
+    await newListing.save();
+
+    req.flash("success", "New Listing Created!");
+    res.redirect("/listings");
+  } catch (error) {
+    console.error("Error creating listing:", error);
+    req.flash("error", "Error creating listing. Please try again.");
+    res.redirect("/listings/new");
   }
-
-  const coordinates = data.features[0].geometry.coordinates;
-
-  let url = req.file.path;
-  let filename = req.file.filename;
-  console.log(url, "..", filename);
-
-  const newListing = new Listing(req.body.listing);
-  newListing.owner = req.user._id;
-  newListing.image = {url, filename};
-  newListing.geometry= { 
-    type: "Point",
-    coordinates: coordinates,
-  };
-
-  await newListing.save();
-
-  req.flash("success", "New Listing Created!");
-  res.redirect("/listings");
 };
 
 module.exports.renderEditForm = async (req, res) => {
@@ -78,28 +83,40 @@ module.exports.renderEditForm = async (req, res) => {
   let originalImageUrl = listing.image.url;
   originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_250");
 
-  res.render("listings/edit.ejs", {listing, originalImageUrl});
+  res.render("listings/edit.ejs", { listing, originalImageUrl });
 };
 
 module.exports.updateListing = async (req, res) => {
-  let { id } = req.params;
-  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  try {
+    let { id } = req.params;
+    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
 
-  if(typeof req.file !== "undefined"){
-    let url = req.file.path;
-    let filename = req.file.filename;
-    listing.image = {url, filename};
+    if (typeof req.file !== "undefined") {
+      let url = req.file.path;
+      let filename = req.file.filename;
+      listing.image = { url, filename };
 
-    await listing.save();
+      await listing.save();
+    }
+
+    req.flash("success", "Listing Updated!");
+    res.redirect(`/listings/${id}`);
+  } catch (error) {
+    console.error("Error updating listing:", error);
+    req.flash("error", "Error updating listing. Please try again.");
+    res.redirect("/listings");
   }
-
-  req.flash("success", "Listing Updated!");
-  res.redirect(`/listings/${id}`);
 };
 
 module.exports.deleteListing = async (req, res) => {
-  let { id } = req.params;
-  const listing = await Listing.findByIdAndDelete(id);
-  req.flash("success", "Listing Deleted!");
-  res.redirect(`/listings`);
+  try {
+    let { id } = req.params;
+    const listing = await Listing.findByIdAndDelete(id);
+    req.flash("success", "Listing Deleted!");
+    res.redirect(`/listings`);
+  } catch (error) {
+    console.error("Error deleting listing:", error);
+    req.flash("error", "Error deleting listing. Please try again.");
+    res.redirect("/listings");
+  }
 };

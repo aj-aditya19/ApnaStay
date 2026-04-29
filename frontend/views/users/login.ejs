@@ -1,0 +1,32 @@
+<% layout("/layouts/boilerplate") %> 
+
+<section class="auth-shell">
+    <div class="auth-copy">
+        <p class="home-kicker">Welcome back</p>
+        <h1>Login to continue your next stay.</h1>
+        <p>
+            Pick up where you left off, manage your listings, and keep exploring places you actually want to book.
+        </p>
+    </div>
+
+    <div class="auth-card">
+        <h2>Login</h2>
+        <form action="/login" method="POST" class="needs-validation auth-form" novalidate>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" required autocomplete="email">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <div class="auth-password-wrap">
+                    <input type="password" name="password" id="password" class="form-control auth-password-input" required autocomplete="current-password">
+                    <button type="button" class="auth-password-toggle" data-password-target="password" aria-label="Show password">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <button class="btn btn-dark auth-btn auth-btn--login">Login</button>
+        </form>
+        <p class="auth-footnote">New here? <a href="/signup">Create an account</a></p>
+    </div>
+</section>

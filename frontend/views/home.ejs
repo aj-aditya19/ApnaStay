@@ -1,0 +1,59 @@
+<% layout("/layouts/boilerplate") %>
+
+<section class="home-hero">
+  <div class="home-hero__content">
+    <p class="home-kicker">Stay. Explore. Repeat.</p>
+    <h1>Find your next place to stay with ApnaStay.</h1>
+    <p class="home-copy">
+      Discover unique homes, cozy rooms, and standout destinations around the world.
+      Browse listings, save time, and book with confidence.
+    </p>
+
+    <div class="home-actions">
+      <% if (!currentUser) { %>
+        <a class="btn btn-outline-dark home-secondary home-cta home-cta--ghost" href="/signup">Create account</a>
+        <a class="btn btn-outline-dark home-secondary home-cta home-cta--solid" href="/login">Login</a>
+      <% } else { %>
+        <a class="btn btn-dark home-primary" href="/listings">Explore listings</a>
+        <a class="btn btn-outline-dark home-secondary home-cta home-cta--ghost" href="/listings/new">Add your home</a>
+      <% } %>
+    </div>
+
+    <div class="home-stats">
+      <div>
+        <strong>1000+</strong>
+        <span>places to explore</span>
+      </div>
+      <div>
+        <strong>Secure</strong>
+        <span>auth and reviews</span>
+      </div>
+      <div>
+        <strong>Fast</strong>
+        <span>search and map view</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-hero__panel">
+    <div class="home-card home-card--large">
+      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80" alt="Modern interior" />
+      <div>
+        <h2>Curated stays</h2>
+        <p>Comfortable, memorable, and easy to discover.</p>
+      </div>
+    </div>
+
+    <div class="home-card-grid">
+      <div class="home-card home-card--small">
+        <h3>Featured spots</h3>
+        <p>Hand-picked places for every kind of trip.</p>
+      </div>
+      <div class="home-card home-card--small home-card--accent">
+        <h3>Ready to host?</h3>
+        <p>List your place and reach travelers faster.</p>
+      </div>
+    </div>
+  </div>
+</section>
+

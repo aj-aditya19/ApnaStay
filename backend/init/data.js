@@ -347,6 +347,102 @@ const sampleListings = [
     location: "Costa Rica",
     country: "Costa Rica",
   },
+  {
+    title: "Pink City Heritage Stay",
+    description:
+      "Stay close to Jaipur's historic core with easy access to its forts, palaces, and UNESCO-listed old city streets.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=60",
+    },
+    price: 2600,
+    location: "Jaipur",
+    country: "India",
+    geometry: {
+      type: "Point",
+      coordinates: [75.82, 26.915],
+    },
+  },
+  {
+    title: "Lakefront Palace View",
+    description:
+      "A calm stay in Udaipur with views of the lake city, palace complexes, and evening walks near the old waterfront.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1514222134-b57cbb8ce073?auto=format&fit=crop&w=800&q=60",
+    },
+    price: 3200,
+    location: "Udaipur",
+    country: "India",
+    geometry: {
+      type: "Point",
+      coordinates: [73.677116, 24.525049],
+    },
+  },
+  {
+    title: "Backwater Breeze Villa",
+    description:
+      "A breezy coastal escape in Kochi near the waterfront, with access to spice markets, heritage lanes, and the Arabian Sea.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=60",
+    },
+    price: 2800,
+    location: "Kochi",
+    country: "India",
+    geometry: {
+      type: "Point",
+      coordinates: [76.2673, 9.9312],
+    },
+  },
+  {
+    title: "Snowline Cabin in Manali",
+    description:
+      "A mountain hideout above the Kullu Valley, ideal for travelers looking for cold air, forests, and long Himalayan views.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1509644851169-2acc08aa25b6?auto=format&fit=crop&w=800&q=60",
+    },
+    price: 2400,
+    location: "Manali",
+    country: "India",
+    geometry: {
+      type: "Point",
+      coordinates: [77.189246, 32.243177],
+    },
+  },
+  {
+    title: "Ghatside Retreat",
+    description:
+      "A heritage-style stay near Varanasi's riverfront, with quick access to ghats, temples, and the Ganges at sunrise.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=60",
+    },
+    price: 2200,
+    location: "Varanasi",
+    country: "India",
+    geometry: {
+      type: "Point",
+      coordinates: [83.0128, 25.3189],
+    },
+  },
+  {
+    title: "Seaside Stay in Goa",
+    description:
+      "A relaxed beach stay in Goa for easy access to shoreline cafes, palm-lined roads, and long coastal evenings.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60",
+    },
+    price: 3500,
+    location: "Panaji",
+    country: "India",
+    geometry: {
+      type: "Point",
+      coordinates: [73.8278, 15.4909],
+    },
+  },
 ];
 
 module.exports = { data: sampleListings };
